@@ -1,8 +1,10 @@
 "use client";
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useAuth } from '@/context/AuthContext';
 
 export default function LoginPage() {
+    const { login } = useAuth();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
@@ -10,7 +12,8 @@ export default function LoginPage() {
 
     const handleLogin = (e) => {
         e.preventDefault();
-        if (username === 'admin' && password === 'password') {
+        const success = login(username, password);
+        if (success) {
             router.push('/');
         } else {
             setError('Invalid username or password');

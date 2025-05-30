@@ -1,9 +1,11 @@
 "use client";
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { useAuth } from '@/context/AuthContext';
 
 
 export default function Home() {
+  const { user } = useAuth();
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('all');
@@ -83,10 +85,14 @@ export default function Home() {
             <Link href={`/product/${product.id}`}>
             <button style={{ marginRight: "0.5rem", cursor: 'pointer' }}>Details</button>
             </Link>
-            <Link href={`/edit/${product.id}`}>
-              <button style={{ backgroundColor: '#0070f3', color: 'white', border: 'none', padding: '0.5rem', cursor: 'pointer' }}>Edit</button>
-            </Link>
-            <button onClick={() => handleDelete(product.id)} style={{ backgroundColor: 'crimson', color:'white', border: 'none', padding: '0.5rem', cursor: 'pointer' }}>Delete</button>
+            {user?.role === 'admin' && (
+              <div style={{ marginTop: '1rem' }}>
+                <Link href={`/edit/${product.id}`}>
+                  <button style={{ backgroundColor: '#0070f3', color: 'white', border: 'none', padding: '0.5rem', cursor: 'pointer' }}>Edit</button>
+                </Link>
+                <button onClick={() => handleDelete(product.id)} style={{ backgroundColor: 'crimson', color:'white', border: 'none', padding: '0.5rem', cursor: 'pointer' }}>Delete</button>
+              </div>
+            )}
           </div>
         ))}
         </div>
