@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useAuth } from '@/context/AuthContext';
+import '@/styles/home.css';
 
 
 export default function Home() {
@@ -54,30 +55,26 @@ export default function Home() {
   if (loading) return <p>Loading products...</p>
 
   return (
-    <div style={{ padding: '2rem' }}>
-      <h1>Welcome to the Store 🛍️</h1>
+    <div className='home-container'>
+      <h1 className='home-title'>Welcome to the Store 🛍️</h1>
       
       {user?.role === 'admin' && (
         <Link href="/add">
-          <button style={{ marginTop: '1rem', padding: '0.5rem 1rem' }}>
+          <button className='add-button'>
             Add New Product
           </button>
         </Link>
       )}
-
-      <h1>Products</h1>
-      <div style={{ marginBottom: '1rem' }}>
+      <div className='search-filter'>
         <input 
           type= 'text'
           placeholder='Search products...'
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          style={{ padding: '0.5rem', width: '100%', maxWidth: '400px' }}
-        />
-      </div>
+          className='search-input'
+          />
 
-      <div style={{ marginBottom: '1rem' }}>
-        <select value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}>
+        <select value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)} className='category-select'>
           <option value={"all"}>All categories</option>
           {categories.map(cat => (
             <option key={cat} value={cat}>{cat}</option>
@@ -85,23 +82,26 @@ export default function Home() {
         </select>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
+
+      <div className='product-grid'>
         {filteredProducts.map(product => (
-          <div key={product.id} style={{ border: '1px solid #ccc', padding: '1rem', borderRadius: '8px' }}>
-            <img src={product.image} alt={product.title} style={{ height: '150px', objectFit: 'contain' }} />
+          <div key={product.id} className='card'>
+            <img src={product.image} alt={product.title} />
             <h3>{product.title}</h3>
+            <p><em>{product.category}</em></p>
             <p>${product.price}</p>
-            <p style={{ fontStyle: 'italic' }}>{product.category}</p>
+
             <Link href={`/product/${product.id}`}>
-            <button style={{ marginRight: "0.5rem", cursor: 'pointer' }}>Details</button>
+              <button>Details</button>
             </Link>
+
             {user?.role === 'admin' && (
-              <div style={{ marginTop: '1rem' }}>
+              <>
                 <Link href={`/edit/${product.id}`}>
-                  <button style={{ backgroundColor: '#0070f3', color: 'white', border: 'none', padding: '0.5rem', cursor: 'pointer' }}>Edit</button>
+                  <button>Edit</button>
                 </Link>
-                <button onClick={() => handleDelete(product.id)} style={{ backgroundColor: 'crimson', color:'white', border: 'none', padding: '0.5rem', cursor: 'pointer' }}>Delete</button>
-              </div>
+                <button onClick={() => handleDelete(product.id)} className='delete-btn'>Delete</button>
+              </>
             )}
           </div>
         ))}
