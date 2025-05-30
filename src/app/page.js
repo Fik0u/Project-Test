@@ -64,6 +64,10 @@ export default function Home() {
             <p>${product.price}</p>
             <p style={{ fontStyle: 'italic' }}>{product.category}</p>
             <Link href={`/product/${product.id}`}>Details</Link>
+            <br />
+            <Link href={`/edit/${product.id}`}>
+              <button style={{ backgroundColor: '#0070f3', color: 'white', border: 'none', padding: '0.5rem', cursor: 'pointer' }}>Edit</button>
+            </Link>
           </div>
         ))}
       </div>
