@@ -54,7 +54,17 @@ export default function Home() {
   if (loading) return <p>Loading products...</p>
 
   return (
-    <div style={{ padding: '1rem' }}>
+    <div style={{ padding: '2rem' }}>
+      <h1>Welcome to the Store 🛍️</h1>
+      
+      {user?.role === 'admin' && (
+        <Link href="/add">
+          <button style={{ marginTop: '1rem', padding: '0.5rem 1rem' }}>
+            Add New Product
+          </button>
+        </Link>
+      )}
+
       <h1>Products</h1>
       <div style={{ marginBottom: '1rem' }}>
         <input 
