@@ -1,26 +1,37 @@
 "use client";
-
-import { createContext, useContext, useState } from "react";
+import { createContext, use, useContext, useState } from "react";
+import { useRouter } from "next/navigation";
 
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null); 
+    const router = useRouter();
 
-    const login = (username, password) => {
-        if (username === "admin" && password === "password") {
-            setUser({ username, role: "admin" });
-            return true;
-        } else if (username === "user" && password === "password") {
-            setUser({ username, role: "user" });
-            return true;
-        } else {
-            return false;
+    const login = async (username, password) => {
+        try {
+            const response = await fetch('https://fakestoreapi.com/users');
+            const users = await response.json();
+
+            const foundUser = users.find(user => user.username === username && user.password === password);
+            if (foundUser) {
+                const role = foundUser.id === 1 ? "admin" : "user"; // Assuming id 1 is admin
+                setUser({ ...foundUser, role });
+                router.push('/');
+            } else {
+                throw new Error("Invalid username or password");
+            }
+        } catch (error) {
+            console.error("Login failed:", error);
+            alert("Login failed: " + error.message);
         }
     };
 
-    const logout = () => setUser(null);
+    const logout = () => {
+        setUser(null);
+        router.push('/login');
+    }
 
 return (
     <AuthContext.Provider value={{ user, login, logout }}>

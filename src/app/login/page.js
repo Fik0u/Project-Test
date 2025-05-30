@@ -10,9 +10,9 @@ export default function LoginPage() {
     const [error, setError] = useState('');
     const router = useRouter();
 
-    const handleLogin = (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault();
-        const success = login(username, password);
+        const success = await login(username, password);
         if (success) {
             router.push('/');
         } else {
