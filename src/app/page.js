@@ -32,6 +32,23 @@ export default function Home() {
     return matchesCategory && matchesSearch;
   });
 
+  const handleDelete = async (id) => {
+    const confirmDelete = window.confirm("Are you sure you want to delete this product?");
+    if (!confirmDelete) return;
+
+    try {
+      await fetch(`https://fakestoreapi.com/products/${id}`, {
+        method: 'DELETE',
+      });
+
+      setProducts(products.filter(product => product.id !== id));
+      alert("Product deleted successfully");
+    } catch (error) {
+      console.error("Error deleting product:", error);
+      alert("Failed to delete product");
+    }
+  };
+
   if (loading) return <p>Loading products...</p>
 
   return (
@@ -63,14 +80,16 @@ export default function Home() {
             <h3>{product.title}</h3>
             <p>${product.price}</p>
             <p style={{ fontStyle: 'italic' }}>{product.category}</p>
-            <Link href={`/product/${product.id}`}>Details</Link>
-            <br />
+            <Link href={`/product/${product.id}`}>
+            <button style={{ marginRight: "0.5rem", cursor: 'pointer' }}>Details</button>
+            </Link>
             <Link href={`/edit/${product.id}`}>
               <button style={{ backgroundColor: '#0070f3', color: 'white', border: 'none', padding: '0.5rem', cursor: 'pointer' }}>Edit</button>
             </Link>
+            <button onClick={() => handleDelete(product.id)} style={{ backgroundColor: 'crimson', color:'white', border: 'none', padding: '0.5rem', cursor: 'pointer' }}>Delete</button>
           </div>
         ))}
-      </div>
+        </div>
     </div>
   );
 }
