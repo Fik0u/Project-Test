@@ -2,6 +2,8 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
+import '@/styles/login.css';
+
 
 export default function LoginPage() {
     const { login } = useAuth();
@@ -21,31 +23,29 @@ export default function LoginPage() {
     };
 
     return (
-        <div style={{ maxWidth: 400, margin: '2rem auto' }}>
-            <h2>Login</h2>
-            <form onSubmit={handleLogin}>
-                <div style={{ marginBottom: 10}}>
+        <div className='login-container'>
+            <h2 className='login-title'>Login</h2>
+            <form onSubmit={handleLogin} className='login-form'>
+                <div>
                     <label>Username</label>
                     <input
                         type='text'
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                         required
-                        style={{ width: '100%' }}
                     />
                 </div>
-                <div style={{ marginBottom: 10 }}>
+                <div>
                     <label>Password</label>
                     <input
                         type='password'
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required
-                        style={{ width: '100%' }}
                     />
                 </div>
-                {error && <p style={{ color: 'red' }}>{error}</p>}
-                <button type='submit'>Login</button>
+                {error && <p className='login-error'>{error}</p>}
+                <button type='submit' className='login-button'>Login</button>
             </form>
         </div>
     )

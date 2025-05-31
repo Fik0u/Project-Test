@@ -1,6 +1,6 @@
 "use client";
-
 import { useState } from "react";
+import '@/styles/addProd.css';
 
 
 export default function AddProductPage() {
@@ -40,9 +40,9 @@ export default function AddProductPage() {
 };
 
 return (
-    <div style={{ padding: "2rem", maxWidth: "600px", margin: "auto" }}>
-        <h1>Add Product</h1>
-        <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+    <div className="add-product-container">
+        <h1 className="add-product-title">Add Product</h1>
+        <form onSubmit={handleSubmit} className="add-product-form" >
             <input
                 type="text"
                 placeholder="Title"
@@ -76,7 +76,7 @@ return (
                 <option value="men's clothing">men's clothing</option>
                 <option value="women's clothing">women's clothing</option>
             </select>
-            <button type="submit" style={{ padding: "0.5rem", fontWeight: "bold" }}>
+            <button type="submit" className="submit-button" >
                 Add
             </button>
         </form>

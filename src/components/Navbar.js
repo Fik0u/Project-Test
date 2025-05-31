@@ -10,10 +10,7 @@ export default function Navbar() {
 return (
     <nav className="navbar">
         <div>
-        <Link href="/" style={{ marginRight: 20 }}>Home</Link>
-        {user && (
-            <Link href='/add'>Add Product</Link>
-        )}
+        <Link href="/">Home</Link>
         </div>
         <div className='navbar-user'>
         {user ? (

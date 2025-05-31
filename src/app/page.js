@@ -89,20 +89,24 @@ export default function Home() {
             <img src={product.image} alt={product.title} />
             <h3>{product.title}</h3>
             <p><em>{product.category}</em></p>
-            <p>${product.price}</p>
+            <p><strong>${product.price}</strong></p>
 
-            <Link href={`/product/${product.id}`}>
-              <button>Details</button>
-            </Link>
-
-            {user?.role === 'admin' && (
-              <>
-                <Link href={`/edit/${product.id}`}>
-                  <button>Edit</button>
+            <div className='card-actions'>
+              <div className='card-buttons'>
+                <Link href={`/product/${product.id}`}>
+                  <button>Details</button>
                 </Link>
+                {user?.role === 'admin' && (
+                  
+                    <Link href={`/edit/${product.id}`}>
+                      <button>Edit</button>
+                    </Link>
+                )}
+              </div>
+              {user?.role === 'admin' && (
                 <button onClick={() => handleDelete(product.id)} className='delete-btn'>Delete</button>
-              </>
-            )}
+              )}
+            </div>
           </div>
         ))}
         </div>

@@ -40,8 +40,8 @@
 .search-input {
     padding: 0.6rem 1rem;
     border: 2px solid #c9b8f3;
-    border-radius: 8px;
-    width: 280px;
+    border-radius: 40px;
+    width: 250px;
     outline: none;
     background-color: #fff;
     color: black;
@@ -86,7 +86,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 400px;
+    height: 450px;
 }
 
 .card:hover {
@@ -115,13 +115,27 @@
     color: white;
     border: none;
     padding: 0.4rem 0.8rem;
-    border-radius: 5px;
+    border-radius: 10px;
     cursor: pointer;
-    margin-right: 0.5rem;
+    width: 100%;
+}
+
+.card-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.card-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 1.2rem;
+    text-align: center;
 }
 
 .card button:hover {
-    background-color: #5a0099;
+    background-color: #802549;
 }
 
 .card .delete-btn {

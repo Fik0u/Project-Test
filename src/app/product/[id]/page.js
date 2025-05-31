@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
+import '@/styles/prodDetails.css';
 
 export default function ProductDetails() {
     const { id } = useParams();
@@ -21,14 +22,20 @@ export default function ProductDetails() {
     if (!product) return <p>Product not found</p>;
 
     return (
-        <div style={{ padding: "2rem" }}>
-            <h1>{product.title}</h1>
-            <img src={product.image} alt={product.title} style={{ height: 300, objectFit: "contain" }} />
-            <p><strong>Price :</strong> ${product.price}</p>
-            <p><strong>Category :</strong> {product.category}</p>
-            <p><strong>Description :</strong> {product.description}</p>
-            <p><strong>Rate :</strong> ⭐ {product.rating?.rate} /5</p>
-            <p><strong>Reviews :</strong> {product.rating?.count}</p>
+        <div className="product-container">
+            <div className="product-image-section">
+                <img src={product.image} alt={product.title} className="product-image" />
+            </div>
+            <div className="product-details-section">
+                <h1 className="product-title">{product.title}</h1>
+                <div className="product-info">
+                    <p><strong>Price :</strong> ${product.price}</p>
+                    <p><strong>Category :</strong> {product.category}</p>
+                    <p><strong>Description :</strong> {product.description}</p>
+                    <p><strong>Rate :</strong> ⭐ {product.rating?.rate} /5</p>
+                    <p><strong>Reviews :</strong> {product.rating?.count}</p>
+                </div>
+            </div>
         </div>
     );
 }
