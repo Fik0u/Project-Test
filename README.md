@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## App Design Brief 
+🛍️ Fake Store Project
 
-## Getting Started
+Une application e-commerce simple développée avec **Next.js**, permettant de consulter, rechercher, filtrer, ajouter et supprimer des produits. Elle utilise [FakeStoreAPI](https://fakestoreapi.com/) comme source de données.
 
-First, run the development server:
+___________________________________________
 
-```bash
+## ⚙️ Configuration et exécution locale
+
+# 1. Cloner le dépôt
+git clone https://github.com/Fik0u/fake-store-project.git
+
+# 2. Se déplacer dans le dossier du projet
+cd fake-store-app
+
+# 3. Installer les dépendances
+npm install
+
+# 4. Lancer le serveur de développement
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+# 5. Ouvrir le navigateur
+Choisir le port http://localhost:3000
+__________________________________________
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## 📦 Fonctionnalités principales
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+🛒 Liste de produits : Affichés depuis l’API GET /products
 
-## Learn More
+🔍 Recherche : Par titre 
 
-To learn more about Next.js, take a look at the following resources:
+🗂️ Filtrage par catégorie : GET /products/categories
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+➕ Ajout d’un produit et mise à jour : Formulaire avec POST /products
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+🗑️ Suppression	: Accessible uniquement aux admins
 
-## Deploy on Vercel
+🔐 Auth fictive via contexte : Démo de droits utilisateur vs admin
+____________________________________________
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🚧 Processus de développement
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Création du projet avec create-next-app;
+
+Intégration de la page Home (/) avec produits dynamiques;
+
+Création du formulaire /add pour ajouter un produit;
+
+Intégration du système de recherche & filtre par catégorie;
+
+Mise en place d’un contexte AuthContext;
+
+Affichage conditionnel des boutons (Edit/Delete) selon le rôle;
+
+Ajout du style (couleurs, effets, responsive);
+
+Favicon & nettoyage final.
